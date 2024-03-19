@@ -1,0 +1,22 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: gateway
+  security:
+    excludePaths:
+      - /login
+      - /register
+
+  cloud:
+    nacos:
+      server-addr: 10.21.23.154:8848
+    gateway:
+      routes:
+        - id: lz-user
+          uri: lb://lz-user
+          predicates:
+            - Path=/user/**
+jwt:
+  key: loveYourself
+
