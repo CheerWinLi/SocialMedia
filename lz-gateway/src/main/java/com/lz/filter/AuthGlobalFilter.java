@@ -66,6 +66,7 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
             ServerHttpResponse response = exchange.getResponse();
             response.setStatusCode(HttpStatus.UNAUTHORIZED);
             //前端进行登录页面的跳转以及访问
+
             return response.setComplete();
         }
         //传递用户信息
@@ -86,6 +87,7 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
 
     public boolean isExclude(String path) {
         //TODO 判断请求路径是否不需要拦截    首先对登录注册进行放行
+        //TODO 为什么push不了啊神经
         return false;
     }
 }
