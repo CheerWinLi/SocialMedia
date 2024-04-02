@@ -23,6 +23,5 @@ public class AuthProperties {
      * 不用校验的路径
      */
 
-    @Value("${spring.security.excludePaths}")
     private List<String> excludePaths;
 }

@@ -22,7 +22,4 @@ public class RegisterBO {
     @NotBlank(message = "邮箱不能为空")
     private String email;
 
-    @Pattern(regexp = "^[01]$", message = "性别只能是男或女")
-    private Integer gender;
-
 }

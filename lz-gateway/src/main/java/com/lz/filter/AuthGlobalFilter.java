@@ -2,9 +2,11 @@ package com.lz.filter;
 
 import cn.hutool.core.text.AntPathMatcher;
 import cn.hutool.jwt.JWTException;
-import com.lz.common.AuthProperties;
-import com.lz.util.JwtUtil;
+
 import lombok.RequiredArgsConstructor;
+
+import lz.util.JwtUtil;
+import org.redisson.client.RedisClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -27,12 +29,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AuthGlobalFilter implements GlobalFilter, Ordered {
 
-    @Autowired
-    private final AuthProperties authProperties;
 
     @Autowired
     private JwtUtil jwtUtil;
-
 
     private final AntPathMatcher antPathMatcher = new AntPathMatcher();
 
@@ -82,12 +81,9 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
     public int getOrder() {
         return 0;
     }
+
     public boolean isExclude(String path) {
-        for (String pathPattern : authProperties.getExcludePaths()) {
-            if (antPathMatcher.match(pathPattern, path)) {
-                return true;
-            }
-        }
+        //TODO 判断请求路径是否不需要拦截    首先对登录注册进行放行
         return false;
     }
 }

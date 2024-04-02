@@ -4,8 +4,8 @@ import com.lz.entity.bo.LoginBO;
 import com.lz.entity.bo.RegisterBO;
 import com.lz.entity.vo.RegisterVO;
 import com.lz.entity.vo.TokenVO;
-import com.lz.entity.vo.UserVO;
-import com.lz.result.RespResult;
+
+import lz.result.RespResult;
 import org.springframework.stereotype.Service;
 
 /**

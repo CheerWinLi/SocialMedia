@@ -2,21 +2,24 @@ server:
   port: 8080
 spring:
   application:
-    name: gateway
-  security:
-    excludePaths:
-      - /login
-      - /register
-
+    name: lz-gateway
   cloud:
     nacos:
-      server-addr: 10.21.23.154:8848
-    gateway:
-      routes:
-        - id: lz-user
-          uri: lb://lz-user
-          predicates:
-            - Path=/user/**
+      discovery:
+        server-addr: 10.21.32.154:8848
+#    profiles:
+#      active: dev
+  datasource:
+    url: jdbc:mysql://10.21.32.154:3306/lz-user?useUnicode=true&rewriteBatchedStatements=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+  redis:
+    address: redis://10.21.32.221:6379
+    password: 123456
+feign:
+  okhttp:
+    enabled: true
 jwt:
-  key: loveYourself
+  key: key
 

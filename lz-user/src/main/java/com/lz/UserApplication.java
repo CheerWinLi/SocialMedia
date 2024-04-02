@@ -4,6 +4,7 @@ import lz.com.config.DefaultFeignConfig;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
@@ -12,8 +13,10 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  */
 
 @MapperScan("com.lz.mapper")
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"lz.util","com.lz.config"})
 @EnableFeignClients(defaultConfiguration = DefaultFeignConfig.class)
+@EnableDiscoveryClient
+
 public class UserApplication {
     public static void main(String[] args) {
         SpringApplication.run(UserApplication.class,args);

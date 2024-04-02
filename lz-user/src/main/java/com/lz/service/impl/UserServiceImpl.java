@@ -3,20 +3,17 @@ package com.lz.service.impl;
 import cn.hutool.core.lang.Assert;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
-import com.lz.constant.PayLoad;
-import com.lz.constant.ResultConstant;
 import com.lz.entity.bo.LoginBO;
 import com.lz.entity.bo.RegisterBO;
 import com.lz.entity.po.User;
 import com.lz.entity.vo.RegisterVO;
 import com.lz.entity.vo.TokenVO;
-import com.lz.entity.vo.UserVO;
 import com.lz.mapper.UserMapper;
-import com.lz.result.RespResult;
 import com.lz.service.UserService;
-import com.lz.util.JwtUtil;
-import lombok.RequiredArgsConstructor;
-import lz.com.client.UserClient;
+import lz.constant.PayLoad;
+import lz.constant.ResultConstant;
+import lz.result.RespResult;
+import lz.util.JwtUtil;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -31,12 +28,12 @@ import java.util.Date;
  * @date : 2024/03/04
  */
 @Service
-@RequiredArgsConstructor
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
-    @Resource
+    @Autowired
     private RedissonClient redissonClient;
-    @Resource
+
+    @Autowired
     private JwtUtil jwtUtil;
     @Resource
     private PasswordEncoder passwordEncoder;
@@ -65,7 +62,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
         //对用户名是否重复进行检查
         User byUsername = userMapper.getByUsername(registerBO.getUsername());
-        Assert.isTrue(byUsername != null, "用户已存在,请更换用户名");
+        Assert.isTrue(byUsername == null, "用户已存在,请更换用户名");
 
         //将注册信息封装到use对象,利用Mps进行数据插入
         User newUser = new User()
@@ -73,8 +70,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
                 .setPassword(passwordEncoder.encode(registerBO.getPassword()))
                 .setCreateTime(new Date(System.currentTimeMillis()))
                 .setEmail(registerBO.getEmail())
-                .setDelFlag(0)
-                .setGender(registerBO.getGender());
+                .setDelFlag(0);
         Assert.isTrue(userMapper.insert(newUser) > 0, "用户注册失败");
         return new RespResult<RegisterVO>(ResultConstant.SUCCESS_CODE, ResultConstant.OPERATE_SUCCESS_MESSAGE, new RegisterVO().setMessage("注册成功").setResult(true));
     }
