@@ -10,9 +10,9 @@ import org.springframework.web.reactive.config.EnableWebFlux;
  * @author :Lictory
  * @date : 2024/03/04
  */
-@SpringBootApplication()
-@ComponentScan(basePackages = {"lz.util","com.lz.config"})
+@SpringBootApplication(scanBasePackages = {"lz.util","com.lz.config"})
 @EnableDiscoveryClient
+@EnableWebFlux
 public class GateWayApplication {
     public static void main(String[] args) {
         SpringApplication.run(GateWayApplication.class, args);

@@ -6,7 +6,7 @@ import cn.hutool.jwt.JWTException;
 import lombok.RequiredArgsConstructor;
 
 import lz.util.JwtUtil;
-import org.redisson.client.RedisClient;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -33,6 +33,8 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
     @Autowired
     private JwtUtil jwtUtil;
 
+    @Autowired
+    private RedissonClient redissonClient;
     private final AntPathMatcher antPathMatcher = new AntPathMatcher();
 
     @Override

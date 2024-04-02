@@ -16,7 +16,6 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication(scanBasePackages = {"lz.util","com.lz.config"})
 @EnableFeignClients(defaultConfiguration = DefaultFeignConfig.class)
 @EnableDiscoveryClient
-
 public class UserApplication {
     public static void main(String[] args) {
         SpringApplication.run(UserApplication.class,args);

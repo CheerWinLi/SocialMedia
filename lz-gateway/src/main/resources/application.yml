@@ -7,13 +7,15 @@ spring:
     nacos:
       discovery:
         server-addr: 10.21.32.154:8848
-#    profiles:
-#      active: dev
-  datasource:
-    url: jdbc:mysql://10.21.32.154:3306/lz-user?useUnicode=true&rewriteBatchedStatements=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: root
+  #    profiles:
+  #      active: dev
+  #  datasource:
+  #    url: jdbc:mysql://10.21.32.154:3306/lz-user?useUnicode=true&rewriteBatchedStatements=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+  #    driver-class-name: com.mysql.cj.jdbc.Driver
+  #    username: root
+  #    password: root
+  main:
+    web-application-type: reactive
   redis:
     address: redis://10.21.32.221:6379
     password: 123456
