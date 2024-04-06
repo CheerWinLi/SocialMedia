@@ -1,13 +1,16 @@
 package com.lz.filter;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.text.AntPathMatcher;
 import cn.hutool.jwt.JWTException;
 
+import com.lz.constant.AuthProperties;
 import lombok.RequiredArgsConstructor;
 
-import lz.util.JwtUtil;
-import org.redisson.api.RedissonClient;
+import com.lz.constant.WebSecurityConstant;
+import com.lz.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -27,16 +30,17 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
+@EnableConfigurationProperties(AuthProperties.class)
 public class AuthGlobalFilter implements GlobalFilter, Ordered {
 
 
     @Autowired
     private JwtUtil jwtUtil;
 
-    @Autowired
-    private RedissonClient redissonClient;
     private final AntPathMatcher antPathMatcher = new AntPathMatcher();
 
+    @Autowired
+    private  AuthProperties authProperties;
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         //获取request
@@ -50,8 +54,8 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
         }
         //获取token
         String token = null;
-        List<String> headers = request.getHeaders().get("token");
-        if (headers != null && !headers.isEmpty()) {
+        List<String> headers = request.getHeaders().get(WebSecurityConstant.AUTH_HEADER);
+        if (!CollUtil.isEmpty(headers)) {
             token = headers.get(0);
         }
         //解析并校验
@@ -85,9 +89,13 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
         return 0;
     }
 
-    public boolean isExclude(String path) {
+    public boolean isExclude(String antPath) {
         //TODO 判断请求路径是否不需要拦截    首先对登录注册进行放行
-        //TODO 为什么push不了啊神经
+        for (String excludePath : authProperties.getExcludePaths()) {
+            if(antPathMatcher.match(excludePath,antPath)){
+                return true;
+            }
+        }
         return false;
     }
 }
