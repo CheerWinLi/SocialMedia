@@ -13,20 +13,20 @@ import org.springframework.context.annotation.Bean;
  */
 
 public class DefaultFeignConfig {
-    @Bean
-    public Logger.Level feignLogLevel(){
-        return Logger.Level.FULL;
-    }
-
-    @Bean
-    public RequestInterceptor userInfoRequestInterceptor(){
-        return new RequestInterceptor() {
-            @Override
-            public void apply(RequestTemplate template) {
-                Long userId = UserContext.getUser();
-                Assert.notNull(userId,"userId为空");
-                template.header("user-info",userId.toString());
-            }
-        };
-    }
+//    @Bean
+//    public Logger.Level feignLogLevel(){
+//        return Logger.Level.FULL;
+//    }
+//
+//    @Bean
+//    public RequestInterceptor userInfoRequestInterceptor(){
+//        return new RequestInterceptor() {
+//            @Override
+//            public void apply(RequestTemplate template) {
+//                Long userId = UserContext.getUser();
+//                Assert.notNull(userId,"userId为空");
+//                template.header("user-info",userId.toString());
+//            }
+//        };
+//    }
 }

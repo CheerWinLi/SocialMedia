@@ -7,12 +7,13 @@ import com.lz.entity.vo.TokenVO;
 import com.lz.result.RespResult;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @author :Lictory
  * @date : 2024/04/05
  */
-@Service
+
 public interface AuthService {
     /**
      *  登录
@@ -27,4 +28,12 @@ public interface AuthService {
      * @return 返回操作信息
      */
     RespResult<Void> register(@RequestBody RegisterBO registerBO);
+
+    /**
+     * 检查用户名是否重复
+     * @param username 注册的用户名
+     * @return bool
+     */
+    RespResult<Boolean> verifyUsername(@RequestParam("username") String username);
+
 }

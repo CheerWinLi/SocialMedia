@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 
 import com.lz.constant.WebSecurityConstant;
 import com.lz.util.JwtUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
@@ -31,6 +32,7 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 @EnableConfigurationProperties(AuthProperties.class)
+@Slf4j
 public class AuthGlobalFilter implements GlobalFilter, Ordered {
 
 
@@ -47,7 +49,7 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
         ServerHttpRequest request = exchange.getRequest();
         //判断是否需要拦截
         //TODO 进行路径校验
-
+        log.info(request.toString());
         if (isExclude(request.getPath().toString())) {
             //该路径不需要拦截,直接放行
             return chain.filter(exchange);

@@ -12,7 +12,7 @@ import org.springframework.web.reactive.config.EnableWebFlux;
  * @author :Lictory
  * @date : 2024/03/04
  */
-@SpringBootApplication(scanBasePackages = {"com.lz.util","com.lz.constant"})
+@SpringBootApplication(scanBasePackages = {"com.lz.util","com.lz.constant","com.lz"})
 @EnableDiscoveryClient
 @EnableFeignClients
 @EnableConfigurationProperties

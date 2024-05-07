@@ -15,7 +15,7 @@ import org.springframework.cloud.openfeign.FeignClient;
  * @date : 2024/03/04
  */
 
-@FeignClient(value = "lz-user", configuration = DefaultFeignConfig.class)
+@FeignClient(value = "lz-user")
 public interface UserClient {
 
 }

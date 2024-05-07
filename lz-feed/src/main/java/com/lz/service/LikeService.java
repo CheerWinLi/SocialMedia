@@ -1,0 +1,30 @@
+package com.lz.service;
+
+import com.lz.result.RespResult;
+import org.springframework.stereotype.Service;
+
+/**
+ * @author :Lictory
+ * @date : 2024/04/17
+ */
+
+
+public interface LikeService {
+
+    /**
+     *
+     * @param videoId
+     * @param userId
+     * @return
+     */
+    RespResult<Void> addLike(String videoId,String userId);
+
+    /**
+     *
+     * @param videoId
+     * @param userId
+     * @return
+     */
+    RespResult<Void> deleteLike(String videoId,String userId);
+
+}

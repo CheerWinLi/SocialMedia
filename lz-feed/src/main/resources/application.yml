@@ -1,0 +1,26 @@
+server:
+  port: 8084
+spring:
+  application:
+    name: lz-feed
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 10.21.32.154:8848
+
+  #  profiles:
+  #    active: dev
+  datasource:
+    url: jdbc:mysql://10.21.32.154:3306/lz-feed?useUnicode=true&rewriteBatchedStatements=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+  redis:
+    address: redis://10.21.32.221:6379
+    password: 123456
+feign:
+  okhttp:
+    enabled: true
+jwt:
+  key: key
+

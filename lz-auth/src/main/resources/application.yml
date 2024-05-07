@@ -1,6 +1,8 @@
 server:
-  port: 8082
+  port: 8085
 spring:
+#  main:
+#    web-application-type: reactive
   application:
     name: lz-auth
   cloud:
@@ -21,6 +23,7 @@ spring:
 feign:
   okhttp:
     enabled: true
+
 
 jwt:
   key: key

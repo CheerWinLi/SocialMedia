@@ -6,6 +6,8 @@ spring:
   cloud:
     nacos:
       discovery:
+        locator:
+          enabled: true
         server-addr: 10.21.32.154:8848
     gateway:
       routes:
@@ -16,8 +18,11 @@ spring:
         - id: lz-auth
           uri: lb://lz-auth
           predicates:
-            - Path=/login
-            - Path=/register
+            - Path=/api/**
+        - id: lz-feed
+          uri: lb://lz-feed
+          predicates:
+            - Path=/feed/**
   #    profiles:
   #      active: dev
   #  datasource:
@@ -34,8 +39,10 @@ jwt:
 
 auth:
   exclude-paths: #无需登录校验的路径
-    - /user/login
-    - /user/register
+    - /api/login
+    - /api/register
+    - /api/verifyUsername
+    - /feed/video/postVideo
 
 #  redis:
 #    address: redis://10.21.32.221:6379
@@ -43,3 +50,11 @@ auth:
 #feign:
 #  okhttp:
 #    enabled: true
+minio:
+  bucket1:
+    endpoint: 10.21.32.192
+    port: 9090
+    accessKey: 1fh7mgzk80MNOjcUiqZZ
+    secretKey: DXtuCLk3rKhRu7DczidN4NmP94WYMeyPjh9Iv35y
+    bucket: lictory
+    publicEndpoint: http://10.21.32.243:9090

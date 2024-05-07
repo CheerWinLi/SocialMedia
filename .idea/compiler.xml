@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="lz-gateway" />
+        <module name="lz-api" />
+        <module name="lz-core" />
+        <module name="lz-feed" />
+        <module name="lz-files" />
+        <module name="lz-user" />
+        <module name="lz-redis" />
+        <module name="lz-minio" />
+        <module name="lz-auth" />
+        <module name="lz-chat" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="test" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="lz-api" options="-parameters" />
+      <module name="lz-auth" options="-parameters" />
+      <module name="lz-chat" options="-parameters" />
+      <module name="lz-common" options="" />
+      <module name="lz-core" options="-parameters" />
+      <module name="lz-feed" options="-parameters" />
+      <module name="lz-files" options="-parameters" />
+      <module name="lz-gateway" options="-parameters" />
+      <module name="lz-minio" options="-parameters" />
+      <module name="lz-redis" options="-parameters" />
+      <module name="lz-user" options="-parameters" />
+      <module name="test" options="-parameters" />
+    </option>
+  </component>
+</project>

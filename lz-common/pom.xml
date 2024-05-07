@@ -16,6 +16,7 @@
         <module>lz-redis</module>
         <module>lz-core</module>
         <module>lz-api</module>
+        <module>lz-minio</module>
     </modules>
 
     <properties>
@@ -24,5 +25,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

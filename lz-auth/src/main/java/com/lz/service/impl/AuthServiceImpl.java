@@ -2,6 +2,7 @@ package com.lz.service.impl;
 
 
 import cn.hutool.core.lang.Assert;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 
@@ -50,9 +51,8 @@ public class AuthServiceImpl extends ServiceImpl<AuthMapper, User> implements Au
         User user = authMapper.getByUsername(loginBO.getUsername());
         //判断账号是否存在
         Assert.isTrue(user != null, "账号或密码输入错误,请检查");
-
         //判断密码是否正确
-        Assert.isTrue(user.getPassword().equals(passwordEncoder.encode(loginBO.getPassword())), "账号或密码输入错误,请检查");
+        Assert.isTrue(passwordEncoder.matches(loginBO.getPassword(), user.getPassword()), "账号或密码输入错误,请检查");
         //更新token
         String jwtToken = jwtUtil.createJwtToken(user.getId() + "", new PayLoad().setUserId(user.getId()));
         redissonClient.getBucket(user.getId() + "").set(jwtToken);
@@ -66,7 +66,7 @@ public class AuthServiceImpl extends ServiceImpl<AuthMapper, User> implements Au
 
         //对用户名是否重复进行检查
         User user = authMapper.getByUsername(registerBO.getUsername());
-        Assert.isTrue(user != null, "用户已存在,请更换用户名");
+        Assert.isTrue(user == null, "用户已存在,请更换用户名");
 
         //将注册信息封装到use对象,利用Mps进行数据插入
         User newUser = new User()
@@ -77,5 +77,15 @@ public class AuthServiceImpl extends ServiceImpl<AuthMapper, User> implements Au
                 .setDelFlag(0);
         Assert.isTrue(authMapper.insert(newUser) > 0, "用户注册失败");
         return new RespResult<Void>(ResultConstant.SUCCESS_CODE, ResultConstant.OPERATE_SUCCESS_MESSAGE);
+    }
+
+    @Override
+    public RespResult<Boolean> verifyUsername(String username) {
+        User user = authMapper.getByUsername(username);
+        if(user==null){
+            return new RespResult<Boolean>(ResultConstant.SUCCESS_CODE, ResultConstant.OPERATE_SUCCESS_MESSAGE,true);
+        }else{
+            return new RespResult<Boolean>(ResultConstant.FAIL_CODE, ResultConstant.OPERATE_FAIL_MESSAGE,false);
+        }
     }
 }

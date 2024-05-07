@@ -18,6 +18,9 @@ public class RespResult<T> {
     private String message;
     private T data;
 
+    public RespResult() {
+    }
+
     public RespResult(Integer code, String message, T data) {
         this.code = code;
         this.message = message;

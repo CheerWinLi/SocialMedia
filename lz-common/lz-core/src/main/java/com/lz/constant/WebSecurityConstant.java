@@ -22,6 +22,6 @@ public class WebSecurityConstant {
     public static final String ISSUER = "TopView-BlockChain";
     public static final String SIGN_KEY = "TopView-BlockChain";
     public static final String LOGIN_METHOD_NAME = "login";
-    public static final String AUTH_HEADER="authorization";
+    public static final String AUTH_HEADER="Authorization";
 
 }
