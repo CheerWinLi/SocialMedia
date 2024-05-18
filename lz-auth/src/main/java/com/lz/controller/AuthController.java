@@ -4,7 +4,7 @@ import com.lz.entity.vo.TokenVO;
 
 import com.lz.entity.bo.LoginBO;
 import com.lz.entity.bo.RegisterBO;
-import com.lz.result.RespResult;
+import com.lz.result.CommonResult;
 
 import com.lz.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,17 +24,17 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping("/login")
-    public RespResult<TokenVO> login(@Validated @RequestBody LoginBO loginBO) {
+    public CommonResult<TokenVO> login(@Validated @RequestBody LoginBO loginBO) {
         return authService.login(loginBO);
     }
 
     @PostMapping("/register")
-    public RespResult<Void> register(@Validated @RequestBody RegisterBO registerBO) {
+    public CommonResult<Void> register(@Validated @RequestBody RegisterBO registerBO) {
         return authService.register(registerBO);
     }
 
     @PostMapping("/verifyUsername")
-    public RespResult<Boolean> verifyUsername(@RequestParam String username) {
+    public CommonResult<Boolean> verifyUsername(@RequestParam String username) {
         return authService.verifyUsername(username);
     }
 

@@ -1,8 +1,5 @@
 package com.lz.service;
 
-import com.lz.entity.Group;
-import com.lz.entity.GroupUser;
-
 import java.util.List;
 
 /**

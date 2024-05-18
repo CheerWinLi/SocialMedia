@@ -1,11 +1,9 @@
 package com.lz.controller;
 
 import com.lz.constant.ResultConstant;
-import com.lz.entity.Group;
-import com.lz.entity.GroupUser;
-import com.lz.result.RespResult;
+import com.lz.entity.po.Group;
+import com.lz.result.CommonResult;
 import com.lz.service.GroupService;
-import com.lz.service.GroupUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,8 +25,8 @@ public class GroupController {
     private GroupService groupService;
 
     @GetMapping("/list/{userId}")
-    public RespResult<List<Group>>  getGroupList(@PathVariable Integer userId){
-        return RespResult.successWithMsg(ResultConstant.OPERATE_SUCCESS_MESSAGE,groupService.getGroupList(userId));
+    public CommonResult<List<Group>> getGroupList(@PathVariable Integer userId){
+        return CommonResult.successWithMsg(ResultConstant.OPERATE_SUCCESS_MESSAGE,groupService.getGroupList(userId));
     }
 
 

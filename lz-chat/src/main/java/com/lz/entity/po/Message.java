@@ -1,4 +1,4 @@
-package com.lz.entity;
+package com.lz.entity.po;
 
 import lombok.Data;
 import lombok.experimental.Accessors;

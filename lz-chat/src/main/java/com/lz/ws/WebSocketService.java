@@ -1,10 +1,9 @@
 package com.lz.ws;
 
 import com.alibaba.fastjson.JSON;
-import com.lz.entity.Message;
+import com.lz.entity.po.Message;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpSession;
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;

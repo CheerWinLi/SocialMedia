@@ -2,13 +2,13 @@ package com.lz.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.lz.entity.Group;
+import com.lz.entity.po.Group;
 import com.lz.mapper.GroupMapper;
-import com.lz.result.RespResult;
 import com.lz.service.GroupService;
 import com.lz.service.GroupUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -29,5 +29,20 @@ public class GroupServiceImpl extends ServiceImpl<GroupMapper, Group> implements
         LambdaQueryWrapper<Group> wrapper=new LambdaQueryWrapper<>();
         wrapper.in(Group::getId,groupList);
         return baseMapper.selectList(wrapper);
+    }
+
+    @Override
+    public void createGroup(String groupName) {
+
+    }
+
+    @Override
+    public void uploadImage(MultipartFile file) {
+
+    }
+
+    @Override
+    public void updateGroupName(String newGroupName) {
+
     }
 }

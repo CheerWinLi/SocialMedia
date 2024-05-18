@@ -1,4 +1,4 @@
-package com.lz.entity;
+package com.lz.entity.po;
 
 import java.io.Serializable;
 import com.baomidou.mybatisplus.annotation.TableField;

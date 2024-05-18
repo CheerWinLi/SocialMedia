@@ -1,8 +1,7 @@
 package com.lz.service;
 
 import com.lz.entity.vo.CommentVO;
-import com.lz.result.RespResult;
-import org.springframework.stereotype.Service;
+import com.lz.result.CommonResult;
 
 /**
  * @author :Lictory
@@ -15,19 +14,19 @@ public interface CommentService {
      * @param comment
      * @return
      */
-    RespResult<Void> addComment(String videoId, String comment);
+    CommonResult<Void> addComment(String videoId, String comment);
 
     /**
      *
      * @param videoId
      * @return
      */
-    RespResult<Void> deleteComment(String videoId);
+    CommonResult<Void> deleteComment(String videoId);
 
     /**
      *
      * @param videoId
      * @return
      */
-    RespResult<CommentVO> getComments(String videoId);
+    CommonResult<CommentVO> getComments(String videoId);
  }

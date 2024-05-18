@@ -2,7 +2,6 @@ package com.lz.service.impl;
 
 
 import cn.hutool.core.lang.Assert;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 
@@ -14,7 +13,7 @@ import com.lz.entity.bo.RegisterBO;
 import com.lz.mapper.AuthMapper;
 import com.lz.constant.PayLoad;
 import com.lz.constant.ResultConstant;
-import com.lz.result.RespResult;
+import com.lz.result.CommonResult;
 import com.lz.util.JwtUtil;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +45,7 @@ public class AuthServiceImpl extends ServiceImpl<AuthMapper, User> implements Au
 
 
     @Override
-    public RespResult<TokenVO> login(LoginBO loginBO) {
+    public CommonResult<TokenVO> login(LoginBO loginBO) {
         TokenVO tokenVO = new TokenVO();
         User user = authMapper.getByUsername(loginBO.getUsername());
         //判断账号是否存在
@@ -57,12 +56,12 @@ public class AuthServiceImpl extends ServiceImpl<AuthMapper, User> implements Au
         String jwtToken = jwtUtil.createJwtToken(user.getId() + "", new PayLoad().setUserId(user.getId()));
         redissonClient.getBucket(user.getId() + "").set(jwtToken);
         tokenVO.setId(user.getId()).setToken(jwtToken).setUsername(loginBO.getUsername());
-        return RespResult.successWithMsg("登陆成功", tokenVO);
+        return CommonResult.successWithMsg("登陆成功", tokenVO);
     }
 
     @Override
     @Transactional(rollbackFor = IllegalAccessError.class)
-    public RespResult<Void> register(RegisterBO registerBO) {
+    public CommonResult<Void> register(RegisterBO registerBO) {
 
         //对用户名是否重复进行检查
         User user = authMapper.getByUsername(registerBO.getUsername());
@@ -76,16 +75,16 @@ public class AuthServiceImpl extends ServiceImpl<AuthMapper, User> implements Au
                 .setEmail(registerBO.getEmail())
                 .setDelFlag(0);
         Assert.isTrue(authMapper.insert(newUser) > 0, "用户注册失败");
-        return new RespResult<Void>(ResultConstant.SUCCESS_CODE, ResultConstant.OPERATE_SUCCESS_MESSAGE);
+        return new CommonResult<Void>(ResultConstant.SUCCESS_CODE, ResultConstant.OPERATE_SUCCESS_MESSAGE);
     }
 
     @Override
-    public RespResult<Boolean> verifyUsername(String username) {
+    public CommonResult<Boolean> verifyUsername(String username) {
         User user = authMapper.getByUsername(username);
         if(user==null){
-            return new RespResult<Boolean>(ResultConstant.SUCCESS_CODE, ResultConstant.OPERATE_SUCCESS_MESSAGE,true);
+            return new CommonResult<Boolean>(ResultConstant.SUCCESS_CODE, ResultConstant.OPERATE_SUCCESS_MESSAGE,true);
         }else{
-            return new RespResult<Boolean>(ResultConstant.FAIL_CODE, ResultConstant.OPERATE_FAIL_MESSAGE,false);
+            return new CommonResult<Boolean>(ResultConstant.FAIL_CODE, ResultConstant.OPERATE_FAIL_MESSAGE,false);
         }
     }
 }

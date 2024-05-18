@@ -1,7 +1,7 @@
 package com.lz.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.lz.entity.GroupUser;
+import com.lz.entity.po.GroupUser;
 import org.springframework.stereotype.Repository;
 
 /**

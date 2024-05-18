@@ -15,7 +15,6 @@ public class CorsConfig {
     @Bean
     public CorsWebFilter corsWebFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-
         CorsConfiguration config = new CorsConfiguration();
         config.addAllowedOrigin("*"); // 允许跨域访问的域名, "*"表示允许所有域
         config.addAllowedMethod("*"); // 允许所有的请求方法访问: GET, POST, DELETE, PUT等

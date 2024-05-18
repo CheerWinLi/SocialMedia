@@ -2,12 +2,11 @@ package com.lz.controller;
 
 import com.lz.entity.vo.CommentVO;
 import com.lz.entity.vo.VideoVO;
-import com.lz.result.RespResult;
+import com.lz.result.CommonResult;
 import com.lz.service.CommentService;
 import com.lz.service.LikeService;
 import com.lz.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.codec.multipart.FilePart;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -29,42 +28,42 @@ public class FeedController {
     private CommentService commentService;
 
     @GetMapping("/video/getVideos")
-    RespResult<VideoVO> getVideos() {
+    CommonResult<VideoVO> getVideos() {
         return videoService.getVideosForRandom();
     }
 
     @GetMapping("/video/getVideosFromUser")
-    RespResult<VideoVO> getVideosFromUser(String username) {
+    CommonResult<VideoVO> getVideosFromUser(String username) {
         return videoService.getVideosFromUser(username);
     }
 
     @PostMapping("/video/postVideo")
-    RespResult<Void> postVideo(@RequestParam("username") String username,@RequestParam("file") MultipartFile file) {
+    CommonResult<Void> postVideo(@RequestParam("username") String username, @RequestParam("file") MultipartFile file) {
         return videoService.postVideo(file,username);
     }
 
     @PostMapping("/like/addLike")
-    RespResult<Void> addLike(@RequestParam("videoId") String videoId, @RequestParam("userId") String userId) {
+    CommonResult<Void> addLike(@RequestParam("videoId") String videoId, @RequestParam("userId") String userId) {
         return likeService.addLike(videoId, userId);
     }
 
     @PostMapping("/like/deleteLike")
-    RespResult<Void> deleteLike(@RequestParam("videoId") String videoId, @RequestParam("userId") String userId) {
+    CommonResult<Void> deleteLike(@RequestParam("videoId") String videoId, @RequestParam("userId") String userId) {
         return likeService.deleteLike(videoId, userId);
     }
 
     @PostMapping("/comment/addComment")
-    RespResult<Void> addComment(@RequestParam("videoId") String videoId, @RequestParam("comment") String Comment) {
+    CommonResult<Void> addComment(@RequestParam("videoId") String videoId, @RequestParam("comment") String Comment) {
         return commentService.addComment(videoId, Comment);
     }
 
     @PostMapping("/comment/deleteComment")
-    RespResult<Void> deleteComment(@RequestParam("videoId") String videoId) {
+    CommonResult<Void> deleteComment(@RequestParam("videoId") String videoId) {
         return commentService.deleteComment(videoId);
     }
 
     @GetMapping("/comment/getComments")
-    RespResult<CommentVO> getComments(@RequestParam("videoId") String videoId) {
+    CommonResult<CommentVO> getComments(@RequestParam("videoId") String videoId) {
         return commentService.getComments(videoId);
     }
 

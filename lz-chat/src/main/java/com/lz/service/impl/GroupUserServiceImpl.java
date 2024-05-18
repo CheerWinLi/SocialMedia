@@ -1,14 +1,10 @@
 package com.lz.service.impl;
 
-import cn.hutool.extra.spring.SpringUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.lz.entity.Group;
-import com.lz.entity.GroupUser;
+import com.lz.entity.po.GroupUser;
 import com.lz.mapper.GroupUserMapper;
-import com.lz.service.GroupService;
 import com.lz.service.GroupUserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

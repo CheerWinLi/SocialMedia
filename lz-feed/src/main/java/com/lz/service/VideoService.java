@@ -1,9 +1,7 @@
 package com.lz.service;
 
 import com.lz.entity.vo.VideoVO;
-import com.lz.result.RespResult;
-import org.springframework.http.codec.multipart.FilePart;
-import org.springframework.stereotype.Service;
+import com.lz.result.CommonResult;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,19 +20,19 @@ public interface VideoService {
      * @param username
      * @return
      */
-    RespResult<Void> postVideo(@RequestPart("file") MultipartFile file, String username);
+    CommonResult<Void> postVideo(@RequestPart("file") MultipartFile file, String username);
 
     /**
      *
      * @param username
      * @return
      */
-    RespResult<VideoVO> getVideosFromUser(@RequestParam("username") String username);
+    CommonResult<VideoVO> getVideosFromUser(@RequestParam("username") String username);
 
 
     /**
      *
      * @return
      */
-    RespResult<VideoVO> getVideosForRandom();
+    CommonResult<VideoVO> getVideosForRandom();
 }

@@ -2,7 +2,7 @@ package com.lz.controller;
 
 import com.lz.client.IpfsClient;
 import com.lz.constant.ResultConstant;
-import com.lz.result.RespResult;
+import com.lz.result.CommonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,8 +20,8 @@ public class FileController {
     private IpfsClient ipfsClient;
 
     @PostMapping("/upload")
-    RespResult<String> uploadFile(MultipartFile file) {
-        return new RespResult<>(ResultConstant.SUCCESS_CODE, ResultConstant.OPERATE_SUCCESS_MESSAGE, ipfsClient.upload(file));
+    CommonResult<String> uploadFile(MultipartFile file) {
+        return new CommonResult<>(ResultConstant.SUCCESS_CODE, ResultConstant.OPERATE_SUCCESS_MESSAGE, ipfsClient.upload(file));
     }
 
 }

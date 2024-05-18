@@ -1,6 +1,6 @@
 package com.lz.service.impl;
 
-import com.lz.result.RespResult;
+import com.lz.result.CommonResult;
 import com.lz.service.LikeService;
 import org.springframework.stereotype.Service;
 
@@ -13,12 +13,12 @@ import org.springframework.stereotype.Service;
 public class LikeServiceImpl implements LikeService {
 
     @Override
-    public RespResult<Void> addLike(String videoId, String userId) {
+    public CommonResult<Void> addLike(String videoId, String userId) {
         return null;
     }
 
     @Override
-    public RespResult<Void> deleteLike(String videoId, String userId) {
+    public CommonResult<Void> deleteLike(String videoId, String userId) {
         return null;
     }
 }

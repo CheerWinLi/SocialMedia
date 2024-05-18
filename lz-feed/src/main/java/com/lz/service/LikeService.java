@@ -1,7 +1,6 @@
 package com.lz.service;
 
-import com.lz.result.RespResult;
-import org.springframework.stereotype.Service;
+import com.lz.result.CommonResult;
 
 /**
  * @author :Lictory
@@ -17,7 +16,7 @@ public interface LikeService {
      * @param userId
      * @return
      */
-    RespResult<Void> addLike(String videoId,String userId);
+    CommonResult<Void> addLike(String videoId, String userId);
 
     /**
      *
@@ -25,6 +24,6 @@ public interface LikeService {
      * @param userId
      * @return
      */
-    RespResult<Void> deleteLike(String videoId,String userId);
+    CommonResult<Void> deleteLike(String videoId, String userId);
 
 }

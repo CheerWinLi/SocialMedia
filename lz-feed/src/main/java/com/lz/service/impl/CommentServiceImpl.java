@@ -1,7 +1,7 @@
 package com.lz.service.impl;
 
 import com.lz.entity.vo.CommentVO;
-import com.lz.result.RespResult;
+import com.lz.result.CommonResult;
 import com.lz.service.CommentService;
 import org.springframework.stereotype.Service;
 
@@ -13,17 +13,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class CommentServiceImpl implements CommentService {
     @Override
-    public RespResult<Void> addComment(String videoId, String comment) {
+    public CommonResult<Void> addComment(String videoId, String comment) {
         return null;
     }
 
     @Override
-    public RespResult<Void> deleteComment(String videoId) {
+    public CommonResult<Void> deleteComment(String videoId) {
         return null;
     }
 
     @Override
-    public RespResult<CommentVO> getComments(String videoId) {
+    public CommonResult<CommentVO> getComments(String videoId) {
         return null;
     }
 }
