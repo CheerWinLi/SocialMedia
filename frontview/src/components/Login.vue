@@ -7,9 +7,11 @@
             <el-main>
                 <el-form :model="loginForm" ref="user" label-width="100px" class="demo-ruleForm" id="loginDiv">
                     <el-form-item>
-                        <el-header style="text-align: center;font-size: 25px;font-weight: bold;margin-left: -110px;margin-top: 30px">欢迎牛魔</el-header>
+                        <el-header
+                                style="text-align: center;font-size: 25px;font-weight: bold;margin-left: -110px;margin-top: 30px">
+                            欢迎牛魔
+                        </el-header>
                     </el-form-item>
-
                     <el-form-item label="用户名:" prop="username">
                         <el-input v-model.trim="loginForm.username" style="width: 300px;height: 40px;"
                                   :plain="true" autocomplete="off"></el-input>
@@ -19,8 +21,25 @@
                                   style="width: 300px;"></el-input>
                     </el-form-item>
                     <el-form-item>
-                        <el-button class="loginButton" @click="login" style="width: 100px;height: 40px;align: center;" type="primary">登录
+                        <el-button class="loginButton" @click="login" style="width: 100px;height: 40px;align: center;"
+                                   type="primary">登录
                         </el-button>
+                        <el-button class="registerButton" type="text" @click="dialogVisible = true">注册</el-button>
+
+                        <el-dialog title="表单弹框" :visible.sync="dialogVisible" width="60%">
+                            <el-form ref="form" :model="registerForm" label-width="80px">
+                                <el-form-item label="账号">
+                                    <el-input v-model="registerForm.username"></el-input>
+                                </el-form-item>
+                                <el-form-item label="密码">
+                                    <el-input v-model="registerForm.password"></el-input>
+                                </el-form-item>
+                            </el-form>
+                            <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="dialogVisible = false;register()">确 定</el-button>
+      </span>
+                        </el-dialog>
                     </el-form-item>
                 </el-form>
             </el-main>
@@ -36,8 +55,14 @@ export default {
                 username: '',
                 password: ''
             },
+            registerForm: {
+                username: '',
+                password: ''
+            },
+            dialogVisible: false,
         }
     },
+
     methods: {
         login() {
             this.$http.post('/login', this.loginForm).then(response => {
@@ -48,15 +73,30 @@ export default {
                     });
                     this.$store.commit('setToken', response.data.data.token);
                     if (response.data.data.status === 1) {
-                        this.$router.push('/student');
-                    } else  {
-                        this.$router.push('/educate');
+                    } else {
                     }
-                }else{
+                } else {
                     this.$message({
                         message: '登陆失败,密码错误或者账号有误',
                         type: 'error'
                     });
+                }
+            })
+        },
+        register() {
+            this.$http.post('/register', this.registerForm).then(response => {
+                if (response.data.code === 200) {
+                    this.$message({
+                        message: '注册成功',
+                        type: 'success'
+                    })
+                    //注册完自己重新登录
+                    this.$router.push('/login')
+                } else {
+                    this.$message({
+                        message: '注册失败',
+                        type: 'error'
+                    })
                 }
             })
         }
@@ -76,11 +116,17 @@ export default {
     transform: translate(-50%, -50%);
 
 
-.loginButton{
-    position: relative;
-    left: 100px;
-    top: 10px;
-}
+    .loginButton {
+        position: relative;
+        left: 100px;
+        top: 10px;
+    }
+
+    .registerButton{
+        position: relative;
+        left: 100px;
+        top: 10px;
+    }
 }
 
 body {
