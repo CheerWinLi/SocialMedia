@@ -2,9 +2,14 @@ package com.lz.entity.po;
 
 import java.util.Date;
 import java.io.Serializable;
+
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import lombok.experimental.Accessors;
+
 /**
  * (Record)实体类
  *
@@ -12,47 +17,52 @@ import lombok.Data;
  * @since 2024-05-07 19:45:54
  */
 @Data
-@TableName(value="record")
+@TableName(value = "record")
+@Accessors(chain = true)
 public class Record implements Serializable {
     private static final long serialVersionUID = -82668824441971274L;
 
-     /**
-     主键
+    /**
+     * 主键
      */
-    @TableField(value="id")
+    @TableId(type = IdType.AUTO)
     private Integer id;
 
-     /**
-     单条聊天内容
+    /**
+     * 单条聊天内容
      */
-    @TableField(value="message")
+    @TableField(value = "message")
     private String message;
 
-     /**
-     发送时间
+    /**
+     * 发送时间
      */
-    @TableField(value="create_time")
+    @TableField(value = "create_time")
     private Date createTime;
 
-     /**
-     发送人
+    /**
+     * 发送人
      */
-    @TableField(value="sender")
+    @TableField(value = "sender")
     private String sender;
 
-     /**
-     0代表非群聊,1代表群聊
+    /**
+     * 0代表非群聊,1代表群聊
      */
-    @TableField(value="type")
+    @TableField(value = "type")
     private Integer type;
 
-     /**
-     接受者,如果type为1则无需处理
+    /**
+     * 接受者,如果type为1则无需处理
      */
-    @TableField(value="receiver")
+    @TableField(value = "receiver")
     private String receiver;
 
-
+    /**
+     * 是否推送
+     */
+    @TableField("send")
+    private Integer send;
 
 }
 

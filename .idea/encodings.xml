@@ -9,6 +9,7 @@
     <file url="file://$PROJECT_DIR$/lz-common/lz-core/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/lz-common/lz-core/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/lz-common/lz-minio/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lz-common/lz-mq/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/lz-common/lz-redis/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/lz-common/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/lz-common/src/main/resources" charset="UTF-8" />

@@ -12,6 +12,7 @@
         <module name="lz-core" />
         <module name="lz-feed" />
         <module name="lz-files" />
+        <module name="lz-mq" />
         <module name="lz-user" />
         <module name="lz-redis" />
         <module name="lz-minio" />
@@ -34,6 +35,7 @@
       <module name="lz-files" options="-parameters" />
       <module name="lz-gateway" options="-parameters" />
       <module name="lz-minio" options="-parameters" />
+      <module name="lz-mq" options="-parameters" />
       <module name="lz-redis" options="-parameters" />
       <module name="lz-user" options="-parameters" />
       <module name="test" options="-parameters" />

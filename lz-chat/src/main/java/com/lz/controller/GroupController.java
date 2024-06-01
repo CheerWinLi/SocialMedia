@@ -18,17 +18,20 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping("/api/group")
+@RequestMapping("/api")
 public class GroupController {
 
     @Autowired
     private GroupService groupService;
 
-    @GetMapping("/list/{userId}")
-    public CommonResult<List<Group>> getGroupList(@PathVariable Integer userId){
-        return CommonResult.successWithMsg(ResultConstant.OPERATE_SUCCESS_MESSAGE,groupService.getGroupList(userId));
+    @GetMapping("/group/list/{userId}")
+    public CommonResult<List<Group>> getGroupList(@PathVariable Integer userId) {
+        return CommonResult.successWithMsg(ResultConstant.OPERATE_SUCCESS_MESSAGE, groupService.getGroupList(userId));
     }
 
-
+    @GetMapping("/group")
+    public CommonResult<List<Group>> createGroup() {
+        return null;
+    }
 
 }

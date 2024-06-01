@@ -72,6 +72,8 @@ export default {
                         type: 'success'
                     });
                     this.$store.commit('setToken', response.data.data.token);
+                    this.$store.commit('setUserId', response.data.data.id);
+                    this.$router.push('/home');
                     if (response.data.data.status === 1) {
                     } else {
                     }
