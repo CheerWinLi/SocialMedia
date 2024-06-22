@@ -33,7 +33,9 @@ public class MinioUtil {
 
     private MinioClient minioClient;
 
-    private static final String PATH_PREFIX = "minio-ysm.topviewclub.cn/dev-logistics/";
+    private static final String PATH_PREFIX = "";
+
+    private static final String TEMP_BUCKET="TEMP_BUCKET";
 
     @Autowired
     public void setMinioClient(@Qualifier("MinioClient") MinioClient minioClient) {
@@ -88,6 +90,66 @@ public class MinioUtil {
             handleMinioException(e);
         }
         return PATH_PREFIX + filename;
+    }
+
+    public void uploadFragmentFile(String bucketName, MultipartFile file, String objectName, String contentType) {
+        try {
+            InputStream inputStream = file.getInputStream();
+            boolean isExist=this.doesBucketExist(bucketName);
+            if (!isExist) {
+                minioClient.makeBucket(MakeBucketArgs.builder().bucket(bucketName).build());
+            }
+            PutObjectArgs putObjectArgs = PutObjectArgs.builder()
+                    .bucket(bucketName)
+                    .object(objectName)
+                    //这里的context Type需要image/jpeg的类似形式而不是单纯jpeg
+                    .contentType(contentType)
+                    .stream(inputStream, inputStream.available(), -1)
+                    .build();
+            minioClient.putObject(putObjectArgs);
+        } catch (MinioException | IOException | NoSuchAlgorithmException | InvalidKeyException e) {
+            handleMinioException(e);
+        }
+    }
+
+    public boolean composeFile(String objectName, String bucketName, List<String> objectNames) {
+        try {
+            boolean isExist=this.doesBucketExist(bucketName);
+            if (!isExist) {
+                minioClient.makeBucket(MakeBucketArgs.builder().bucket(bucketName).build());
+            }
+            List<ComposeSource> composeSourceList = new ArrayList<>();
+            for (String objectName1 : objectNames) {
+                composeSourceList.add(ComposeSource
+                                .builder()
+                                .bucket(TEMP_BUCKET)
+                                .object(objectName1)
+                                .build());
+            }
+            ComposeObjectArgs composeObjectArgs = ComposeObjectArgs.builder()
+                    .bucket(bucketName)
+                    .object(objectName)
+                    .sources(composeSourceList)
+                    .build();
+            minioClient.composeObject(composeObjectArgs);
+        } catch (MinioException | IOException | NoSuchAlgorithmException | InvalidKeyException e) {
+            handleMinioException(e);
+            return false;
+        }
+        return true;
+    }
+
+    public boolean doesBucketExist(String bucketName) {
+        boolean isExist=false;
+        try {
+             isExist = minioClient.bucketExists(BucketExistsArgs.builder().bucket(bucketName).build());
+            if (!isExist) {
+                minioClient.makeBucket(MakeBucketArgs.builder().bucket(bucketName).build());
+            }
+        } catch (MinioException | IOException | NoSuchAlgorithmException | InvalidKeyException e) {
+            handleMinioException(e);
+        }
+        return isExist;
     }
 
     /**
@@ -292,7 +354,6 @@ public class MinioUtil {
                         .length(length)
                         .build());
     }
-
 
     /**
      * 判断MinIO桶中的对象是否存在
